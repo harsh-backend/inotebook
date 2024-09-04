@@ -1,22 +1,19 @@
 import connectToMongo from './db.js'
 import express from 'express'
+import {authRouter} from './routes/auth.js'
+import { notesRouter } from './routes/notes.js'
+
+connectToMongo()
 
 const app = express()
 const port = 8000
 
-app.get('/', (req, res) => {
-    res.send('hello')
+// available routes
+app.use('/api/auth', authRouter)
+app.use('/api/notes', notesRouter)
+
+app.listen(port, () => {
+    console.log(`server is running at port ${port}`)
 })
 
-const startServer = async () => {
-    try {
-        await connectToMongo()
-        app.listen(port, () => {
-            console.log(`server is running at port ${port}`)
-        })
-    } catch (error) {
-        console.log('Failed to connect to database :', error)
-    }
-}
 
-startServer()
