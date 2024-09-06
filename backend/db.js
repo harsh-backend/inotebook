@@ -1,14 +1,19 @@
-import mongoose from 'mongoose'
-const mongoURI = 'mongodb://localhost:27017/inotebook'
+import mongoose from 'mongoose'; // Import mongoose to interact with MongoDB
 
-// connecting to databse
+// MongoDB connection URI pointing to the local instance and 'inotebook' database
+const mongoURI = 'mongodb://localhost:27017/inotebook';
+
+// Function to connect to the MongoDB database
 const connectToMongo = async () => {
     try {
-        await mongoose.connect(mongoURI)
-        console.log('connected to mongodb')
+        // Attempt to connect to the database using mongoose
+        await mongoose.connect(mongoURI);
+        console.log('Connected to MongoDB'); // Log success message if connected
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error)
+        // Catch and log any errors that occur during the connection process
+        console.error('Error connecting to MongoDB:', error);
     }
 }
 
-export default connectToMongo
+// Export the connectToMongo function for use in other files
+export default connectToMongo;
